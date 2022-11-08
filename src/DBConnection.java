@@ -66,6 +66,9 @@ public class DBConnection {
     }
 
     public static void getDataByNIM(Integer nim) throws SQLException {
+        /*
+         * Get data by NIM 
+         */
         connectDatabase();
 
         stmt = conn.createStatement();
@@ -76,10 +79,37 @@ public class DBConnection {
 
         while (result.next()) {
             System.out.println("NIM\t\t:\t" + result.getString("nim"));
-        System.out.println("NAMA LENGKAP\t:\t" + result.getString("nama_lengkap"));
-        System.out.println("JENIS KELAMIN\t:\t" + result.getString("jenis_kelamin"));
-        System.out.println("JURUSAN\t\t:\t" + result.getString("jurusan"));
-        System.out.println("TANGGAL LAHIR\t:\t" + result.getString("tanggal_lahir"));
+            System.out.println("Nama Lengkap\t:\t" + result.getString("nama_lengkap"));
+            System.out.println("Jenis Kelamin\t:\t" + result.getString("jenis_kelamin"));
+            System.out.println("Jurusan\t\t:\t" + result.getString("jurusan"));
+            System.out.println("Tanggal Lahir\t:\t" + result.getString("tanggal_lahir"));
         }
+    }
+
+    public static void getAllData() throws SQLException {
+        /*
+         * Get all of data
+         */
+        connectDatabase();
+
+        String query = "SELECT * from mahasiswa";
+
+        stmt = conn.createStatement();
+
+        result = stmt.executeQuery(query);
+
+        while(result.next()) {
+            System.out.println("NIM\t\t:\t" + result.getString("nim"));
+            System.out.println("Name Lengkap\t:\t" + result.getString("nama_lengkap"));
+            System.out.println("Jenis Kelamin\t:\t" + result.getString("jenis_kelamin"));
+            System.out.println("Jerusan\t\t:\t" + result.getString("jurusan"));
+            System.out.println("Tanggal Lahir\t:\t" + result.getDate("tanggal_lahir"));
+            System.out.println();
+            System.out.println("*********************************************************");
+            System.out.println();
+        }
+
+        stmt.close();
+        conn.close();
     }
 }
